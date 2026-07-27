@@ -59,10 +59,12 @@ def stage_progress(stage: str, completed: int, total: int) -> float:
 
     stage_fraction = completed / total if total else 0.0
     if stage.startswith("Converting"):
-        return 0.1 * stage_fraction
+        return 0.08 * stage_fraction
     if stage.startswith("Detecting"):
-        return 0.1 + (0.1 * stage_fraction)
-    return 0.2 + (0.8 * stage_fraction)
+        return 0.08 + (0.08 * stage_fraction)
+    if stage.startswith("Loading"):
+        return 0.16 + (0.09 * stage_fraction)
+    return 0.25 + (0.75 * stage_fraction)
 
 
 def render_result() -> None:
@@ -79,6 +81,7 @@ def render_result() -> None:
         value=result["transcript"],
         height=420,
         label_visibility="collapsed",
+        key=f"transcript_{result['result_id']}",
     )
     st.download_button(
         "Download transcript",
@@ -237,6 +240,7 @@ if start_transcription:
                 f"{metadata['elapsed_seconds']:.1f} seconds."
             )
             st.session_state["latest_result"] = {
+                "result_id": time.time_ns(),
                 "transcript": transcript,
                 "output_filename": (
                     f"{Path(uploaded_file.name).stem}_transcript.txt"
@@ -251,4 +255,3 @@ if start_transcription:
             st.error(f"Unexpected transcription error: {error}")
 
 render_result()
-

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import gc
 import multiprocessing
 import os
 import re
@@ -109,6 +110,17 @@ def transcribe_parallel_cpu(
     spawn_context = multiprocessing.get_context("spawn")
 
     try:
+        # On a model's first run, downloading once in the parent prevents every
+        # spawned worker from trying to populate the same cache file.
+        if progress_callback:
+            progress_callback("Loading Whisper model", 0, 1)
+        cached_model = whisper.load_model(model_name, device="cpu")
+        del cached_model
+        gc.collect()
+        if progress_callback:
+            progress_callback("Loading Whisper model", 1, 1)
+            progress_callback("Starting parallel workers", 0, len(chunks))
+
         with ProcessPoolExecutor(
             max_workers=worker_count,
             mp_context=spawn_context,
@@ -157,7 +169,11 @@ def transcribe_sequential(
         )
 
     try:
+        if progress_callback:
+            progress_callback("Loading Whisper model", 0, 1)
         model = whisper.load_model(model_name, device=device)
+        if progress_callback:
+            progress_callback("Loading Whisper model", 1, 1)
     except Exception as error:
         raise TranscriptionError(
             f"The Whisper model '{model_name}' could not be loaded: {error}"
