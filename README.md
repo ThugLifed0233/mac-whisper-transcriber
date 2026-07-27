@@ -100,6 +100,17 @@ Streamlit normally opens the app at
 The first use of a model downloads its weights. Once cached by Whisper, the
 model can be reused locally.
 
+## Test
+
+After installing the dependencies:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The suite checks media normalization, speech boundary grouping, transcript
+ordering, and the spawn-safe Streamlit entry point used by macOS CPU workers.
+
 ## Choosing a model
 
 | Model | Relative speed | Relative accuracy | Suggested CPU workers |
@@ -172,7 +183,10 @@ Intentionally not included yet:
 │   ├── engine.py
 │   ├── errors.py
 │   ├── media.py
-│   └── pipeline.py
+│   ├── pipeline.py
+│   └── ui.py
+├── tests/
+│   └── test_core.py
 ├── app.py
 ├── LICENSE
 ├── README.md
@@ -182,4 +196,3 @@ Intentionally not included yet:
 ## License
 
 MIT
-
