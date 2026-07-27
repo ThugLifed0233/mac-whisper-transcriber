@@ -1,0 +1,7 @@
+streamlit>=1.37,<2
+openai-whisper
+torch
+numpy
+soundfile
+silero-vad
+
