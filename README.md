@@ -1,6 +1,7 @@
-# Mac Whisper Transcriber
+# ParallelScribe
 
-A private, local-first audio and video transcription workspace for macOS.
+A private, local-first audio and video transcription workspace that distributes
+Whisper jobs across your Mac's CPU cores.
 
 Drop in a recording, choose a Whisper model, and decide how many CPU workers
 should process it. The app converts the source with FFmpeg, finds speech,
@@ -9,6 +10,17 @@ results back together.
 
 No paid transcription API is used, and the uploaded recording is not sent to
 an external transcription service.
+
+![ParallelScribe interface](docs/assets/parallelscribe-interface.jpg)
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) — pipeline boundaries, concurrency, and
+  ordering guarantees
+- [Development process](docs/DEVELOPMENT.md) — how the project evolved and how
+  to work on it
+- [Privacy model](docs/PRIVACY.md) — what stays local and what requires network
+  access
 
 ## Features
 
@@ -177,7 +189,13 @@ Intentionally not included yet:
 .
 ├── .streamlit/
 │   └── config.toml
-├── mac_whisper_transcriber/
+├── docs/
+│   ├── assets/
+│   │   └── parallelscribe-interface.jpg
+│   ├── ARCHITECTURE.md
+│   ├── DEVELOPMENT.md
+│   └── PRIVACY.md
+├── parallel_scribe/
 │   ├── __init__.py
 │   ├── chunking.py
 │   ├── engine.py
