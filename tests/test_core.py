@@ -10,13 +10,13 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 
-from mac_whisper_transcriber.chunking import (
+from parallel_scribe.chunking import (
     fixed_boundaries,
     group_speech_boundaries,
     load_normalized_audio,
 )
-from mac_whisper_transcriber.pipeline import stitch_transcript
-from mac_whisper_transcriber.media import normalize_media
+from parallel_scribe.pipeline import stitch_transcript
+from parallel_scribe.media import normalize_media
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -80,16 +80,15 @@ class MediaTests(unittest.TestCase):
 
 class EntrypointTests(unittest.TestCase):
     def test_spawn_import_does_not_execute_streamlit_page(self) -> None:
-        sys.modules.pop("mac_whisper_transcriber.ui", None)
+        sys.modules.pop("parallel_scribe.ui", None)
 
         runpy.run_path(
             str(REPOSITORY_ROOT / "app.py"),
             run_name="__mp_main__",
         )
 
-        self.assertNotIn("mac_whisper_transcriber.ui", sys.modules)
+        self.assertNotIn("parallel_scribe.ui", sys.modules)
 
 
 if __name__ == "__main__":
     unittest.main()
-

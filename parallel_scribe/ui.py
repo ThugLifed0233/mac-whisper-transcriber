@@ -1,4 +1,4 @@
-"""Streamlit page for the local Whisper transcription pipeline."""
+"""Streamlit page for ParallelScribe."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import streamlit as st
 import torch
 import whisper
 
-from mac_whisper_transcriber import TranscriptionError, transcribe_file
+from parallel_scribe import TranscriptionError, transcribe_file
 
 
 SUPPORTED_EXTENSIONS = [
@@ -96,15 +96,15 @@ def render_result() -> None:
 
 
 st.set_page_config(
-    page_title="Mac Whisper Transcriber",
+    page_title="ParallelScribe",
     page_icon="🎙️",
     layout="wide",
 )
 
-st.title("Mac Whisper Transcriber")
+st.title("ParallelScribe")
 st.caption(
-    "Private audio and video transcription powered by Whisper. "
-    "Your recording stays on this Mac."
+    "Private, parallel audio and video transcription powered by Whisper. "
+    "Your recording stays on this computer."
 )
 
 uploaded_file = st.file_uploader(
@@ -215,7 +215,7 @@ if start_transcription:
 
         try:
             with tempfile.TemporaryDirectory(
-                prefix="mac_whisper_transcriber_"
+                prefix="parallel_scribe_"
             ) as temporary_directory:
                 work_directory = Path(temporary_directory)
                 safe_suffix = Path(uploaded_file.name).suffix or ".media"

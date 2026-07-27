@@ -1,4 +1,4 @@
-"""Media normalization helpers built around FFmpeg."""
+"""ParallelScribe media normalization helpers built around FFmpeg."""
 
 from __future__ import annotations
 
@@ -71,4 +71,3 @@ def normalize_media(input_path: Path, output_path: Path) -> Path:
         )
 
     return output_path
-

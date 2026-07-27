@@ -1,4 +1,4 @@
-"""Speech-aware creation of ordered Whisper input chunks."""
+"""Speech-aware creation of ordered ParallelScribe input chunks."""
 
 from __future__ import annotations
 
@@ -213,4 +213,3 @@ def write_audio_chunks(
         raise TranscriptionError("No transcribable audio chunks were found.")
 
     return chunks, strategy
-

@@ -9,7 +9,7 @@ def main() -> None:
     """Execute the page only in Streamlit's primary script process."""
 
     runpy.run_module(
-        "mac_whisper_transcriber.ui",
+        "parallel_scribe.ui",
         run_name="__streamlit_ui__",
     )
 

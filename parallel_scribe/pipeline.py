@@ -1,4 +1,4 @@
-"""End-to-end local media transcription orchestration."""
+"""End-to-end ParallelScribe transcription orchestration."""
 
 from __future__ import annotations
 
@@ -131,4 +131,3 @@ def transcribe_file(
         elapsed_seconds=round(time.perf_counter() - started_at, 2),
     )
     return transcript, metadata.to_dict()
-

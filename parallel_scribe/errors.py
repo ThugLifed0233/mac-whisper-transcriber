@@ -1,6 +1,5 @@
-"""Application-specific exceptions."""
+"""ParallelScribe-specific exceptions."""
 
 
 class TranscriptionError(RuntimeError):
     """Raised when media preparation or transcription cannot continue."""
-

@@ -1,4 +1,4 @@
-"""Local, privacy-first media transcription for macOS."""
+"""ParallelScribe's local, privacy-first transcription interface."""
 
 from .errors import TranscriptionError
 from .pipeline import transcribe_file

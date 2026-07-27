@@ -1,4 +1,4 @@
-"""Whisper execution strategies for CPU multiprocessing and Apple MPS."""
+"""ParallelScribe execution strategies for CPU multiprocessing and Apple MPS."""
 
 from __future__ import annotations
 
